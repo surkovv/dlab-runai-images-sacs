@@ -31,14 +31,14 @@ if ! id -u $GASPAR_USER > /dev/null 2>&1; then
     SCRATCH=home
     if [ -d "/mnt/$SCRATCH" ]; then
         USER_HOME=/mnt/$SCRATCH/$GASPAR_USER
-    else if [ -d "/$SCRATCH/$GASPAR_USER" ]; then
+    elif [ -d "/$SCRATCH/$GASPAR_USER" ]; then
         # Mounted on /$SCRATCH/$GASPAR_USER -> do nothing
         USER_HOME=/$SCRATCH/$GASPAR_USER
     else
         # No scratch mounted -> create home in /home
         USER_HOME=/home/${GASPAR_USER}
         mkdir -p $USER_HOME
-    fi fi fi
+    fi
 
     # Create User and add to groups
     useradd -u ${GASPAR_UID} -d $USER_HOME -s /bin/bash ${GASPAR_USER} -g ${GASPAR_GID}     
